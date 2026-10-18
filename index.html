@@ -616,100 +616,93 @@
         </div>
       </div>
 
-      <!-- Netlify contact form -->
-      <div class="contact-form-wrapper">
-        <h3>Send me a message.</h3>
 
-        <form
-          name="contact"
-          method="POST"
-          action="/"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="contact-form"
-        >
-          <input type="hidden" name="form-name" value="contact">
+<!-- Netlify contact form -->
+<div class="contact-form-wrapper">
+  <h3>Send me a message.</h3>
 
-          <p class="hidden-field">
-            <label>
-              Leave this field empty:
-              <input name="bot-field">
-            </label>
-          </p>
+  <form
+    name="contact"
+    method="POST"
+    action="/"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    class="contact-form"
+  >
+    <input type="hidden" name="form-name" value="contact">
 
-          <div class="form-group">
-            <label for="contact-name">Your name</label>
-            <input
-              type="text"
-              id="contact-name"
-              name="name"
-              placeholder="Enter your name"
-              autocomplete="name"
-              required
-            >
-          </div>
+    <p class="hidden-field">
+      <label>
+        Leave this field empty:
+        <input name="bot-field">
+      </label>
+    </p>
 
-          <div class="form-group">
-            <label for="contact-email">Email address</label>
-            <input
-              type="email"
-              id="contact-email"
-              name="email"
-              placeholder="Enter your email"
-              autocomplete="email"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="contact-subject">Subject</label>
-            <input
-              type="text"
-              id="contact-subject"
-              name="subject"
-              placeholder="What would you like to discuss?"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="contact-message">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows="5"
-              placeholder="Write your message here..."
-              required
-            ></textarea>
-          </div>
-
-          <button type="submit" class="contact-submit">
-            Send Message <span aria-hidden="true">↗</span>
-          </button>
-
-          <p id="form-success" class="form-success" hidden>
-            Thank you for reaching out! Your message has been sent successfully.
-            I'll get back to you soon.
-          </p>
-
-
-<p id="form-error" class="form-error" role="alert" hidden>
-  Sorry, your message couldn't be sent. Please try again.
-</p>
-
-
-          <p class="form-note">
-            Thank you for reaching out. I look forward to hearing from you.
-          </p>
-        </form>
-      </div>
-
+    <div class="form-group">
+      <label for="contact-name">Your name</label>
+      <input
+        type="text"
+        id="contact-name"
+        name="name"
+        placeholder="Enter your name"
+        autocomplete="name"
+        required
+      >
     </div>
-  </div>
-</section>
 
+    <div class="form-group">
+      <label for="contact-email">Email address</label>
+      <input
+        type="email"
+        id="contact-email"
+        name="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+        required
+      >
+    </div>
 
-  </main>
+    <div class="form-group">
+      <label for="contact-subject">Subject</label>
+      <input
+        type="text"
+        id="contact-subject"
+        name="subject"
+        placeholder="What would you like to discuss?"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="contact-message">Message</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        rows="5"
+        placeholder="Write your message here..."
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="contact-submit">
+      Send Message <span aria-hidden="true">↗</span>
+    </button>
+
+    <p id="form-success" class="form-success" role="status" hidden>
+      Thank you for reaching out! Your message has been sent successfully.
+      I'll get back to you soon.
+    </p>
+
+    <p id="form-error" class="form-error" role="alert" hidden>
+      Sorry, your message couldn't be sent. Please try again.
+    </p>
+
+    <p class="form-note">
+      Thank you for reaching out. I look forward to hearing from you.
+    </p>
+  </form>
+</div>
+
 
   <!-- Footer -->
   <footer class="site-footer">

@@ -1,112 +1,34 @@
-// Simple welcome message in developer console
-console.log("Welcome to Yoon Pan Eain's Portfolio Website!");
-
-// Optional: Smooth scroll or active menu highlight logic can be added here
-const sections = document.querySelectorAll("section");
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-}, {
-    threshold: 0.15
-});
-
-
-sections.forEach(section => {
-
-    section.classList.add("hidden");
-
-    observer.observe(section);
-
-});
-
-// Ensure to include the CSS file in your HTML for styles to apply
-
 
 document.addEventListener("DOMContentLoaded", () => {
-    const contactForm = document.querySelector(".contact-form");
+    console.log("Welcome to Yoon Pan Eain's Portfolio Website!");
   
-    if (!contactForm) return;
+    // Smooth section reveal animation
+    const sections = document.querySelectorAll("main section");
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
   
-    const params = new URLSearchParams(window.location.search);
-  
-    if (params.get("success") === "true") {
-      let successMessage = document.querySelector(".form-success");
-  
-      if (!successMessage) {
-        successMessage = document.createElement("p");
-        successMessage.className = "form-success";
-        successMessage.setAttribute("role", "status");
-        contactForm.appendChild(successMessage);
-      }
-  
-      successMessage.textContent =
-        "Thank you! Your message has been submitted successfully.";
-  
-      contactForm.reset();
-  
-      // Remove the success query parameter from the URL.
-      window.history.replaceState(
-        {},
-        document.title,
-        window.location.pathname + window.location.hash
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
       );
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll(
-      ".about, .skills, .projects, .contact"
-    );
   
-    // Keep everything visible if animations aren't supported.
-    if (
-      !("IntersectionObserver" in window) ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
+      sections.forEach((section) => {
+        section.classList.add("hidden", "reveal-ready");
+        observer.observe(section);
+      });
     }
   
-    sections.forEach((section) => {
-      section.classList.add("reveal-ready");
-    });
-  
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12
-      }
-    );
-  
-    sections.forEach((section) => observer.observe(section));
-  });
-<form
-  name="contact"
-  method="POST"
-  action="/success.html"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  class="contact-form"
-></form>    
-
-
-document.addEventListener("DOMContentLoaded", () => {
+    // Contact form
     const form = document.querySelector('form[name="contact"]');
   
     if (!form) return;
@@ -115,40 +37,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorMessage = document.getElementById("form-error");
     const submitButton = form.querySelector('button[type="submit"]');
   
+    if (!successMessage || !errorMessage || !submitButton) {
+      console.error("Contact form success/error messages are missing.");
+      return;
+    }
+  
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
   
+      if (!form.reportValidity()) return;
+  
       successMessage.hidden = true;
       errorMessage.hidden = true;
+  
       submitButton.disabled = true;
       submitButton.textContent = "Sending...";
   
       try {
         const formData = new FormData(form);
   
+        // Ensure Netlify receives the form name
+        formData.set("form-name", "contact");
+  
+        const encodedData = new URLSearchParams();
+  
+        for (const [key, value] of formData.entries()) {
+          if (typeof value === "string") {
+            encodedData.append(key, value);
+          }
+        }
+  
         const response = await fetch("/", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          body: new URLSearchParams(formData).toString()
+          body: encodedData.toString()
         });
   
         if (!response.ok) {
-          throw new Error("Form submission failed");
+          throw new Error("The server rejected the submission.");
         }
   
         form.reset();
         successMessage.hidden = false;
         successMessage.scrollIntoView({
-          behavior: "smooth",
+          behavior: prefersReducedMotion ? "auto" : "smooth",
           block: "center"
         });
   
       } catch (error) {
+        console.error("Contact form submission failed:", error);
+  
         errorMessage.hidden = false;
         errorMessage.scrollIntoView({
-          behavior: "smooth",
+          behavior: prefersReducedMotion ? "auto" : "smooth",
           block: "center"
         });
   
