@@ -2010,3 +2010,34 @@ textarea:focus-visible {
 .form-success[hidden] {
   display: none;
 }
+
+
+.form-success,
+.form-error {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 6px;
+  line-height: 1.7;
+}
+
+.form-success {
+  color: #2B211B;
+  background: #E7DED0;
+  border-left: 4px solid #7A3038;
+}
+
+.form-error {
+  color: #7A3038;
+  background: #F5F1E8;
+  border-left: 4px solid #7A3038;
+}
+
+.form-success[hidden],
+.form-error[hidden] {
+  display: none;
+}
+
+.contact-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}

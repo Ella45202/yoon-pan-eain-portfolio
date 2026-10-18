@@ -104,3 +104,59 @@ document.addEventListener("DOMContentLoaded", () => {
   netlify-honeypot="bot-field"
   class="contact-form"
 ></form>    
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector('form[name="contact"]');
+  
+    if (!form) return;
+  
+    const successMessage = document.getElementById("form-success");
+    const errorMessage = document.getElementById("form-error");
+    const submitButton = form.querySelector('button[type="submit"]');
+  
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      successMessage.hidden = true;
+      errorMessage.hidden = true;
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+  
+      try {
+        const formData = new FormData(form);
+  
+        const response = await fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams(formData).toString()
+        });
+  
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+  
+        form.reset();
+        successMessage.hidden = false;
+        successMessage.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+  
+      } catch (error) {
+        errorMessage.hidden = false;
+        errorMessage.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+  
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML =
+          'Send Message <span aria-hidden="true">↗</span>';
+      }
+    });
+  });
+  
