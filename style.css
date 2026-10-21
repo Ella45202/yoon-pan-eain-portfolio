@@ -1299,80 +1299,6 @@
   background: var(--brown) !important;
   width: 100% !important;
   margin: 0 !important;
-  padding: 30px 40px !important; /* Sets safe distance from screen edges */
-  box-sizing: border-box !important;
-  position: relative !important;
-  left: 0 !important;
-  right: 0 !important;
-}
-
-.site-footer .footer-content,
-.site-footer > div {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 20px !important;
-  box-sizing: border-box !important;
-}
-
-.site-footer .footer-logo {
-  color: var(--cream) !important;
-  font-family: var(--heading-font);
-  font-size: 24px;
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.site-footer p,
-.site-footer .footer-content > p {
-  margin: 0 !important;
-  color: #B9AFA5 !important;
-  font-size: 12px;
-  text-align: center;
-  flex-grow: 1;
-}
-
-.site-footer .back-to-top {
-  color: var(--cream) !important;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* Mobile responsive layout */
-@media (max-width: 600px) {
-  .site-footer {
-    padding: 25px 20px !important;
-  }
-  
-  .site-footer .footer-content,
-  .site-footer > div {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 14px !important;
-  }
-  
-  .site-footer p,
-  .site-footer .footer-content > p {
-    order: 3;
-    width: 100%;
-  }
-}/* =========================
-   8. FOOTER
-========================= */
-
-.site-footer {
-  background: var(--brown) !important;
-  width: 100% !important;
-  margin: 0 !important;
   padding: 30px 0 !important;
   box-sizing: border-box !important;
 }
@@ -1430,7 +1356,6 @@
     width: 100%;
   }
 }
-
   /* =========================
      9. TABLET
   ========================= */
